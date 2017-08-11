@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Snippets on Davor Badrov</title>
-    <link>davorbadrov.github.io/snippets/</link>
+    <link>https://davorbadrov.github.io/snippets/</link>
     <description>Recent content in Snippets on Davor Badrov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,25 +10,25 @@
     <webMaster>dev.davor.badrov@gmail.com (davor badrov)</webMaster>
     <lastBuildDate>Mon, 19 Jun 2017 13:37:56 +0200</lastBuildDate>
     
-	<atom:link href="davorbadrov.github.io/snippets/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://davorbadrov.github.io/snippets/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Nested SELECT query | Snippets</title>
-      <link>davorbadrov.github.io/snippets/inner_query_examples/</link>
+      <link>https://davorbadrov.github.io/snippets/inner_query_examples/</link>
       <pubDate>Mon, 19 Jun 2017 13:37:56 +0200</pubDate>
       <author>dev.davor.badrov@gmail.com (davor badrov)</author>
-      <guid>davorbadrov.github.io/snippets/inner_query_examples/</guid>
+      <guid>https://davorbadrov.github.io/snippets/inner_query_examples/</guid>
       <description>How to use inner select query in SQL.
 SELECT t.date , COUNT(*) AS player_count FROM ( SELECT DATE(MIN(`date`)) AS date FROM player_playtime GROUP BY player_name ) AS t GROUP BY t.date DESC LIMIT 60 ;  </description>
     </item>
     
     <item>
       <title>SQL - Find duplicate values | Snippets</title>
-      <link>davorbadrov.github.io/snippets/sql-find-double-entries/</link>
+      <link>https://davorbadrov.github.io/snippets/sql-find-double-entries/</link>
       <pubDate>Mon, 19 Jun 2017 13:37:56 +0200</pubDate>
       <author>dev.davor.badrov@gmail.com (davor badrov)</author>
-      <guid>davorbadrov.github.io/snippets/sql-find-double-entries/</guid>
+      <guid>https://davorbadrov.github.io/snippets/sql-find-double-entries/</guid>
       <description>Find multiple entries inside a table for given values. This example return users which share their email with other users.
 SELECT name, email, COUNT(*) FROM users GROUP BY name, email HAVING COUNT(*) &amp;gt; 1  </description>
     </item>
