@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Avoid global node modules</title>
+  <meta property="og:title" content="Avoid global node modules" />
+  <meta name="twitter:title" content="Avoid global node modules" />
+  <meta name="description" content="I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a npm i -g ... and start coding without thinking about the consequences. For example my team used a globally installed sequelize-cli which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using sequelize 3.">
+  <meta property="og:description" content="I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a npm i -g ... and start coding without thinking about the consequences. For example my team used a globally installed sequelize-cli which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using sequelize 3.">
+  <meta name="twitter:description" content="I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a npm i -g …">
+  <meta name="author" content="davor badrov"/>
+  <link href='davorbadrov.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="davorbadrov.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="davorbadrov.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="davorbadrov.github.io/davorbadrov.github.io/blog/avoid-global-node-modules/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Davor Badrov" />
+
+  <meta name="generator" content="Hugo 0.23" />
+  <link rel="canonical" href="davorbadrov.github.io/davorbadrov.github.io/blog/avoid-global-node-modules/" />
+  <link rel="alternate" href="davorbadrov.github.io/index.xml" type="application/rss+xml" title="Davor Badrov">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="davorbadrov.github.io/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="davorbadrov.github.io/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="davorbadrov.github.io/css/highlight.min.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="davorbadrov.github.io">Davor Badrov</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Home" href="/davorbadrov.github.io">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Blog" href="/davorbadrov.github.io/blog/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Snippets" href="/davorbadrov.github.io/snippets/">Snippets</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/davorbadrov.github.io/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Davor Badrov" href="davorbadrov.github.io">
+            <img class="avatar-img" src="davorbadrov.github.io/img/avatar-icon.png" alt="Davor Badrov" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="blog-heading">
+              <h1>Avoid global node modules</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a <code>npm i -g ...</code> and start coding without thinking about the consequences. For example my team used a globally installed <code>sequelize-cli</code> which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using <code>sequelize</code> 3.x and one using <code>sequelize</code> 4.x and you&rsquo;re in a bad spot, now you have to think about managing the issue which adds unneeded and avoidable overhead.</p>
+
+<p>In my opinion the main reasons to avoid global dependencies are:</p>
+
+<ul>
+<li>non-explicit project dependencies</li>
+<li>harder developer colaboration</li>
+<li>issues if multiple projects use different versions of globally installed packages</li>
+</ul>
+
+<h2 id="devdependencies-a-smarter-alternative">devDependencies, a smarter alternative</h2>
+
+<p>Instead use locally installed node modules whenever you can, if they are tooling or build related packages install them as a dev dependencies via the -D flag, e.g. <code>npm i -D jest</code>. This&rsquo;ll add <code>jest</code> as a development dependency (which means you don&rsquo;t really need it installed to run the project, only to run the tests), now your <em>package.json</em> should have <code>jest</code> installed in the devDependencies section:</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;test-project&quot;,
+    &quot;dependencies&quot;: {
+        ...
+    },
+    &quot;devDependencies&quot;: {
+        &quot;jest&quot;: &quot;^20.0.4&quot;,
+        ...
+    },
+    &quot;scripts&quot;: {
+        ...
+    },
+}
+</code></pre>
+
+<p>The scripts will now be installed when you run <code>npm i</code>, no need to ask around what the projects global dependencies are, e.g. <em>&ldquo;How do I run the project migrations&rdquo;</em>, if the package for migrations is installed locally you&rsquo;ll see the related package listed under dev dependencies.</p>
+
+<h2 id="using-locally-installed-packages">Using locally installed packages</h2>
+
+<p>If you are using a globally installed package, you can access it anywhere via it&rsquo;s name directly:</p>
+
+<p><code>sequelize migration:create --name create_user_table</code></p>
+
+<p>If the <em>sequelize-cli</em> has been added as a dev dependency, it&rsquo;s a bit more tedious, now you&rsquo;ll have to specify a path either directly to the node module, or to the symlink inside the <code>.bin</code> file, which is basically the same thing:</p>
+
+<pre><code class="language-bash"># calling the module directly
+./node_modules/sequelize-cli/bin/sequelize migration:create --name create_user_table
+
+# calling the module symlink
+./node_modules/.bin/sequelize migration:create --name create_user_table
+</code></pre>
+
+<h3 id="localy-installed-packages">Localy installed packages</h3>
+
+<p>All the installed packages you might need to interact with are added to the <strong>node_modules/.bin</strong> directory, if you run:
+<code>ls -al node_modules/.bin</code> inside a node project you&rsquo;ll see a number of the installed packages, all the items you see are symlinks which are linked to scripts in their corresponding node_module folder. You can see that when you list the contents of <code>&lt;project root&gt;/node_modules/.bin</code>:</p>
+
+<pre><code class="language-bash">→ ls -al node_modules/.bin
+total 456
+drwxr-xr-x   59 dbadrov  staff   2006 Jul 19 12:50 .
+drwxr-xr-x  839 dbadrov  staff  28526 Jul 19 12:50 ..
+lrwxr-xr-x    1 dbadrov  staff     19 Jul 18 10:00 _mocha -&gt; ../mocha/bin/_mocha
+lrwxr-xr-x    1 dbadrov  staff     19 Jul 18 10:00 gulp -&gt; ../gulp/bin/gulp.js
+lrwxr-xr-x    1 dbadrov  staff     28 Jul 18 10:00 handlebars -&gt; ../handlebars/bin/handlebars
+lrwxr-xr-x    1 dbadrov  staff     30 Jul 18 10:00 sequelize -&gt; ../sequelize-cli/bin/sequelize
+...
+</code></pre>
+
+<h2 id="the-new-npx-tool">The new npx tool</h2>
+
+<p>A new tool called <code>npx</code> is introduced in <code>npm@5.2.0</code>. It&rsquo;s called the npm package runner and it can call locally installed scripts without the need to specify a path, it&rsquo;ll check if the package is installed and use it if it&rsquo;s there, otherwise it&rsquo;ll install it, execute the command and remove the package. Using <code>npx</code> you can now write:</p>
+
+<p><code>npx sequelize migration:create --name create_user_table</code></p>
+
+<p>I didn&rsquo;t get to play much with it, but it seems like a super useful tool. For more info check the <a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b">introductory article</a>.</p>
+
+<h2 id="npm-scripts">npm scripts</h2>
+
+<p>To make the available options of a project more explicit and intuitive you can add all of the used commands as npm scripts, which are there to avoid repetetive tasks. E.g. if you use <strong>sequelize</strong> in your project and <strong>sequelize-cli</strong> for migrations.</p>
+
+<p>Npm scripts can directly call the installed tools without specifying the path, so inside package.json you can add a script for creating migrations like:</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;npm-local-scripts&quot;,
+    &quot;version&quot;: &quot;0.0.1&quot;,
+    &quot;scripts&quot;: {
+        &quot;create-migration&quot;: &quot;sequelize migration:create&quot;
+    }
+}
+</code></pre>
+
+<p>To call it and properly pass the parameters you need to add the <code>--</code> flag like this:
+<code>npm run create-migration -- --name create_user_table</code></p>
+
+<p>The downside to using this is that you have to rembember the <code>--</code> param, but now you don&rsquo;t need to remember the exact syntax for the script commands, e.g. <em>&ldquo;was it sequelize migration:create or sequelize create:migration&rdquo;</em>. Another advantage of having the script inside package.json is that you can list and tab-complete all the possible commands with <code>npm run</code> and then pressing tab:</p>
+
+<pre><code class="language-bash">→ npm run
+create-fixtures       deploy                integration           sequelize-seed
+create-migration      elastic               integration-test      start
+create-test-database  import-test-database  sequelize             test
+</code></pre>
+
+<h2 id="enable-autocompletion-of-npm-script-commands">Enable autocompletion of npm script commands</h2>
+
+<p>To ease up the usage of npm scripts you can pretty easily enable the tab-completion of all npm commands, including scripts.
+To do it, open your shell and depending on what you use:</p>
+
+<pre><code class="language-sh"># if you're using zshell
+npm completion &gt;&gt; ~/.zshrc # adds the autocompletion code to your rc file
+source ~/.zshrc # enable autocompletion by executing the definitions inside the rc file
+
+# if you're using bash
+npm completion &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<p>Now you can enter <code>npm run</code> and press tab, and it&rsquo;ll list all your scripts, start typing the name of one of the scripts and it&rsquo;ll try to autocomplete it just like file/directory names in your unix shell.</p>
+
+<h2 id="some-exceptions">Some exceptions</h2>
+
+<p>This is just my view of a best practice, and there are always some exceptions, you shouldn&rsquo;t install <code>create-react-app</code> and similar tools as dependencies/devDependencies, that doesn&rsquo;t make much sense.
+For packages like <code>nodemon</code> (backend watcher and live reload) or <code>live-server</code> (super simple file server with live reload) I think there&rsquo;s no need to have them installed as dev dependencies and these are safe to be used as global packages, your teammates could have some</p>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="davorbadrov.github.io/blog/experiments-with-comments-for-npm-scripts/" data-toggle="tooltip" data-placement="top" title="Experiments with comments for npm scripts">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:dev.davor.badrov@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/davorbadrov" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/davor-badrov-670b0312b" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              davor badrov
+                      
+          
+          
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="davorbadrov.github.io">Davor Badrov</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.23</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="davorbadrov.github.io/js/main.js"></script>
+<script src="davorbadrov.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="davorbadrov.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

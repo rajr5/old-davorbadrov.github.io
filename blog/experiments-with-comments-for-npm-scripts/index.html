@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Experiments with comments for npm scripts</title>
+  <meta property="og:title" content="Experiments with comments for npm scripts" />
+  <meta name="twitter:title" content="Experiments with comments for npm scripts" />
+  <meta name="description" content="The amount of npm scripts inside package.json can grow immensely for larger projects, it can become hard to track what each script does, especially if there are multiple people working on the same project and adding the mentioned scripts. It would be of huge help if we could comment what each script does so it&rsquo;s easy to check what it does and how it&rsquo;s used, but due to package.json being a JSON file format, it doesn&rsquo;t support any comments.">
+  <meta property="og:description" content="The amount of npm scripts inside package.json can grow immensely for larger projects, it can become hard to track what each script does, especially if there are multiple people working on the same project and adding the mentioned scripts. It would be of huge help if we could comment what each script does so it&rsquo;s easy to check what it does and how it&rsquo;s used, but due to package.json being a JSON file format, it doesn&rsquo;t support any comments.">
+  <meta name="twitter:description" content="The amount of npm scripts inside package.json can grow immensely for larger projects, it can become hard to track what each script does, especially if there are multiple people working on the same …">
+  <meta name="author" content="davor badrov"/>
+  <link href='davorbadrov.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="davorbadrov.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="davorbadrov.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="davorbadrov.github.io/davorbadrov.github.io/blog/experiments-with-comments-for-npm-scripts/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Davor Badrov" />
+
+  <meta name="generator" content="Hugo 0.23" />
+  <link rel="canonical" href="davorbadrov.github.io/davorbadrov.github.io/blog/experiments-with-comments-for-npm-scripts/" />
+  <link rel="alternate" href="davorbadrov.github.io/index.xml" type="application/rss+xml" title="Davor Badrov">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="davorbadrov.github.io/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="davorbadrov.github.io/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="davorbadrov.github.io/css/highlight.min.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="davorbadrov.github.io">Davor Badrov</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Home" href="/davorbadrov.github.io">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Blog" href="/davorbadrov.github.io/blog/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Snippets" href="/davorbadrov.github.io/snippets/">Snippets</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/davorbadrov.github.io/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Davor Badrov" href="davorbadrov.github.io">
+            <img class="avatar-img" src="davorbadrov.github.io/img/avatar-icon.png" alt="Davor Badrov" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="blog-heading">
+              <h1>Experiments with comments for npm scripts</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>The amount of npm scripts inside package.json can grow immensely for larger projects, it can become hard to track what each script does, especially if there are multiple people working on the same project and adding the mentioned scripts. It would be of huge help if we could comment what each script does so it&rsquo;s easy to check what it does and how it&rsquo;s used, but due to package.json being a JSON file format, it doesn&rsquo;t support any comments. Despite non-native support for comments there are some tricks we can use to work around that limitation.</p>
+
+<h2 id="checking-available-scripts">Checking available scripts</h2>
+
+<p>To check what scripts we can run in terminal we can type <code>npm run</code> (if you&rsquo;re using <strong>yarn</strong> you can do <code>yarn run</code>), this will return a list of npm scripts available to us. Let&rsquo;s assume we have a <strong>package.json</strong> like this in our project directory:</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;npm-script-tips&quot;,
+    &quot;version&quot;: &quot;0.0.1&quot;,
+    &quot;scripts&quot;: {
+        &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+        &quot;build&quot;: &quot;echo \&quot;Building static assets\&quot;&quot;
+    }
+}
+</code></pre>
+
+<p>To check the available scripts we can run <code>npm run</code> in our shell, and we get the list of all available scripts:</p>
+
+<pre><code class="language-sh">Lifecycle scripts included in npm-script-tips:
+  test
+    echo &quot;Error: no test specified&quot; &amp;&amp; exit 1
+
+available via `npm run-script`:
+  build
+    echo &quot;Building static assets&quot;
+</code></pre>
+
+<h2 id="solution-1-attempting-comments-with-prefixes">Solution 1: Attempting comments with // prefixes</h2>
+
+<p>To add a comment you can add fake a npm script entry like the following:</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;npm-script-tips&quot;,
+    &quot;version&quot;: &quot;0.0.2&quot;,
+    &quot;scripts&quot;: {
+        &quot;//test&quot;: &quot;This will run the app's tests&quot;,
+        &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+        &quot;//build&quot;: &quot;This will build the static assets&quot;,
+        &quot;build&quot;: &quot;echo \&quot;Building static assets\&quot;&quot;
+    }
+}
+</code></pre>
+
+<p>The output after <code>npm run</code> is now a bit better:</p>
+
+<pre><code class="language-sh">Lifecycle scripts included in npm-script-tips:
+  test
+    echo &quot;Error: no test specified&quot; &amp;&amp; exit 1
+
+available via `npm run-script`:
+  //test
+    This will run the app's tests
+  //build
+    This will build the static assets
+  build
+    echo &quot;Building static assets&quot;
+</code></pre>
+
+<p><strong>PROS</strong></p>
+
+<ul>
+<li>should work on all platforms</li>
+<li>the comment is next to the file inside package.json</li>
+<li>the comment is visible on <code>npm run</code></li>
+</ul>
+
+<p><strong>CONS</strong></p>
+
+<ul>
+<li>on <code>npm run</code> the comments and scripts aren&rsquo;t grouped next to each other</li>
+</ul>
+
+<h2 id="solution-2-a-hacky-attempt-using">Solution 2: A hacky attempt using #</h2>
+
+<p>Watching <a href="https://egghead.io">egghead.io&rsquo;s</a> tutorials on npm scripts a great solution has been proposed by <a href="http://elijahmanor.com">Elijah Manor</a>.</p>
+
+<p>Most of egghead tutorials are for subscribers only but they definitely pay out to have and their videos usually take only a few minutes and if you can afford them you&rsquo;ll find great value in them.</p>
+
+<p>Elijah suggests using the following trick:</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;npm-script-tips&quot;,
+    &quot;version&quot;: &quot;0.0.3&quot;,
+    &quot;scripts&quot;: {
+        &quot;test&quot;: &quot;# This will run the tests \n\t echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+        &quot;build&quot;: &quot;# This will build the static assets \n\t echo \&quot;Building static assets\&quot;&quot;
+    }
+}
+</code></pre>
+
+<p>What I believe this translates to and why it works is that when we run <code>npm run</code> it feeds the following command into the shell:
+# This will run the tests
+    echo &ldquo;Building static assets&rdquo;
+The first line is treated like a comment and won&rsquo;t be evaluated, the second line is properly executed.</p>
+
+<p>The output looks great with this trick:</p>
+
+<pre><code class="language-sh">Lifecycle scripts included in npm-script-tips:
+  test
+    # This will run the tests
+     echo &quot;Error: no test specified&quot; &amp;&amp; exit 1
+
+available via `npm run-script`:
+  build
+    # This will build the static assets
+     echo &quot;Building static assets&quot;
+</code></pre>
+
+<p><strong>PROS</strong></p>
+
+<ul>
+<li>looks great on <code>npm run</code>, the code is properly displayed and nicely formatted</li>
+<li>works with both <strong>npm</strong> and <strong>yarn</strong></li>
+</ul>
+
+<p><strong>CONS</strong></p>
+
+<ul>
+<li>it doesn&rsquo;t work on Windows, it&rsquo;s only supported on *nix type systems</li>
+<li>the comments can hide the script command</li>
+</ul>
+
+<p>Because <strong>npm</strong> supports only JSON for it&rsquo;s package file format we&rsquo;re stuck with these limitations which is pretty unfortunate.</p>
+
+<h2 id="solution-3-using-extern-tooling-for-solutions">Solution 3: Using extern tooling for solutions</h2>
+
+<p>We can use scripts like the <a href="https://github.com/jaketrent/npm-ls-scripts">npm-ls-scripts</a>. If we install the tool globally <code>npm install npm-ls-scripts -g</code>, we can use it via <code>ls-scripts</code>. Now to enable comments we have to add a config object inside package.json which includes a scripts object with all the scripts we want to comment, it should look like this:</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;npm-script-tips&quot;,
+    &quot;version&quot;: &quot;0.0.1&quot;,
+    &quot;scripts&quot;: {
+        &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+        &quot;build&quot;: &quot;echo \&quot;Building static assets\&quot;&quot;
+    },
+    &quot;config&quot;: {
+        &quot;scripts&quot;: {
+            &quot;build&quot;: &quot;Will build static assets&quot;
+        }
+    }
+}
+</code></pre>
+
+<p>It will output:</p>
+
+<pre><code class="language-sh">NPM - ls scripts
+---
+build - Will build static assets
+test  - echo &quot;Error: no test specified&quot; &amp;&amp; exit 1
+---
+</code></pre>
+
+<p>Which looks great.</p>
+
+<p><strong>PROS</strong></p>
+
+<ul>
+<li>Comments look great with this tool</li>
+<li>It&rsquo;s easy to use</li>
+</ul>
+
+<p><strong>CONS</strong></p>
+
+<ul>
+<li>you have to deal with another tool which may not be acceptable for everyone</li>
+<li>although in the same file the comments and scripts are in separate places</li>
+</ul>
+
+<p>Additional info can be found on the <a href="https://jaketrent.com/post/list-npm-scripts/">author&rsquo;s page</a> and on <a href="https://github.com/jaketrent/npm-ls-scripts">github</a>.</p>
+
+<h2 id="solution-4-use-the-readme-md">Solution 4: Use the README.md</h2>
+
+<p>I believe the README.md file should be present on every project to describe what it does and how to set it up. Depending on your team&rsquo;s dedication to maintain project hygiene you can maintain a list and describe all the scripts inside the README file.</p>
+
+<p><strong>PROS</strong></p>
+
+<ul>
+<li>all can be nicely formatted there</li>
+<li>you have the power of MARKDOWN to add links, usage examples and longer explanations for complex scripts</li>
+</ul>
+
+<p><strong>CONS</strong></p>
+
+<ul>
+<li>the comments and the scripts are now in different places and may run out of sync</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There&rsquo;s no perfect solution here like with most things programming related, it&rsquo;s up to you to weight the pros and cons and determine what works best for you and your team.</p>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+        
+          <li class="next">
+            <a href="davorbadrov.github.io/blog/avoid-global-node-modules/" data-toggle="tooltip" data-placement="top" title="Avoid global node modules">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:dev.davor.badrov@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/davorbadrov" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/davor-badrov-670b0312b" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              davor badrov
+                      
+          
+          
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="davorbadrov.github.io">Davor Badrov</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.23</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="davorbadrov.github.io/js/main.js"></script>
+<script src="davorbadrov.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="davorbadrov.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Davor Badrov</title>
+    <link>davorbadrov.github.io/page/</link>
+    <description>Recent content in Pages on Davor Badrov</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>dev.davor.badrov@gmail.com (davor badrov)</managingEditor>
+    <webMaster>dev.davor.badrov@gmail.com (davor badrov)</webMaster>
+    <lastBuildDate>Mon, 19 Jun 2017 13:37:56 +0200</lastBuildDate>
+    
+	<atom:link href="davorbadrov.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About me</title>
+      <link>davorbadrov.github.io/about-me/</link>
+      <pubDate>Mon, 19 Jun 2017 13:37:56 +0200</pubDate>
+      <author>dev.davor.badrov@gmail.com (davor badrov)</author>
+      <guid>davorbadrov.github.io/about-me/</guid>
+      <description>I&amp;rsquo;m a full stack engineer currently stationed in Zagreb, Croatia. My main stack is based on JavaScript, these days it&amp;rsquo;s React and Node. I&amp;rsquo;m part of a team working for Kanban (knb.io) where we are developing cool things for both startups and enterprises.
+I&amp;rsquo;m always looking for freelancing opportunities and fun projects to work on. You can check my resume on LinkedIn.
+To list the skills &amp;amp; technologies which I&amp;rsquo;m familiar with: React, Node, Hapi.</description>
+    </item>
+    
+  </channel>
+</rss>
