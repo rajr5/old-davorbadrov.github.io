@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Davor Badrov</title>
+    <link>https://davorbadrov.github.io/tags/projects/</link>
+    <description>Recent content in Projects on Davor Badrov</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2017 Davor Badrov</copyright>
+    <lastBuildDate>Sun, 13 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://davorbadrov.github.io/tags/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Chess clock</title>
+      <link>https://davorbadrov.github.io/projects/chess-clock/</link>
+      <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://davorbadrov.github.io/projects/chess-clock/</guid>
+      <description>This is a PWA I made with Preact (and preact-cli). It&amp;rsquo;s an open sourced chess clock. It has a 100/100 lighthouse score. The project is hosted with Firebase and can be seen here. You can check it&amp;rsquo;s source here.</description>
+    </item>
+    
+    <item>
+      <title>Geocoding service</title>
+      <link>https://davorbadrov.github.io/projects/geocoding-project/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://davorbadrov.github.io/projects/geocoding-project/</guid>
+      <description>A project I made in colaboration with Rade Koroman, my budy who is a designer. It&amp;rsquo;s a free and open source solution with an UI for getting coordinates for locations. You can check it here, and it&amp;rsquo;s source here.
+It&amp;rsquo;s a frontend only project made in React and it uses OpenStreetMap&amp;rsquo;s Nominatim API free API for geolocation (getting coordinates out of locations). The app was bootstraped using create-react-app.</description>
+    </item>
+    
+  </channel>
+</rss>
