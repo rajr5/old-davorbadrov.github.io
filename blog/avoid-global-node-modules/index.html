@@ -1090,7 +1090,7 @@ margin-left: -4%;
     
     
 
-<p>I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a <code>npm i -g ...</code> and start coding without thinking about the consequences. For example my team used a globally installed <code>sequelize-cli</code> which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using <code>sequelize</code> 3.x and one using <code>sequelize</code> 4.x and you&rsquo;re in a bad spot, now you have to think about managing the issue which adds unneeded and avoidable overhead.</p>
+<p>I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a <code>npm i -g [package-name]</code> and start coding without thinking about the consequences. For example my team used a globally installed <code>sequelize-cli</code> which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using <code>sequelize</code> 3.x and one using <code>sequelize</code> 4.x and you&rsquo;re in a bad spot, now you have to think about managing the issue which adds unneeded and avoidable overhead.</p>
 
 <p>In my opinion the main reasons to avoid global dependencies are:</p>
 

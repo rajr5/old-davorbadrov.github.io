@@ -18,7 +18,7 @@
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://davorbadrov.github.io/blog/avoid-global-node-modules/</guid>
-      <description>I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a npm i -g ... and start coding without thinking about the consequences. For example my team used a globally installed sequelize-cli which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using sequelize 3.</description>
+      <description>I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a npm i -g [package-name] and start coding without thinking about the consequences. For example my team used a globally installed sequelize-cli which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using sequelize 3.</description>
     </item>
     
     <item>
