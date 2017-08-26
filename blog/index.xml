@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on Davor Badrov</title>
-    <link>https://davorbadrov.github.io/blog/</link>
+    <link>https://davorbadrov.xyz/blog/</link>
     <description>Recent content in Blog on Davor Badrov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2017 Davor Badrov</copyright>
     <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://davorbadrov.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://davorbadrov.xyz/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Avoid global node modules</title>
-      <link>https://davorbadrov.github.io/blog/avoid-global-node-modules/</link>
+      <link>https://davorbadrov.xyz/blog/avoid-global-node-modules/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://davorbadrov.github.io/blog/avoid-global-node-modules/</guid>
+      <guid>https://davorbadrov.xyz/blog/avoid-global-node-modules/</guid>
       <description>I suggest avoiding project related global dependencies and installing everything you need for a project as main or dev dependencies. Sometimes you just want to hack something up and you do a npm i -g [package-name] and start coding without thinking about the consequences. For example my team used a globally installed sequelize-cli which later cause problems due to different versions being installed accross the team. It can cause problems for your personal projects too, if you have one project using sequelize 3.</description>
     </item>
     
     <item>
       <title>Experiments with comments for npm scripts</title>
-      <link>https://davorbadrov.github.io/blog/experiments-with-comments-for-npm-scripts/</link>
+      <link>https://davorbadrov.xyz/blog/experiments-with-comments-for-npm-scripts/</link>
       <pubDate>Mon, 19 Jun 2017 12:53:11 +0200</pubDate>
       
-      <guid>https://davorbadrov.github.io/blog/experiments-with-comments-for-npm-scripts/</guid>
+      <guid>https://davorbadrov.xyz/blog/experiments-with-comments-for-npm-scripts/</guid>
       <description>The amount of npm scripts inside package.json can grow immensely for larger projects, it can become hard to track what each script does, especially if there are multiple people working on the same project and adding the mentioned scripts. It would be of huge help if we could comment what each script does so it&amp;rsquo;s easy to check what it does and how it&amp;rsquo;s used, but due to package.json being a JSON file format, it doesn&amp;rsquo;t support any comments.</description>
     </item>
     

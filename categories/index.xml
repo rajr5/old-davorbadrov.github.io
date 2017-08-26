@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Davor Badrov</title>
-    <link>https://davorbadrov.github.io/categories/</link>
+    <link>https://davorbadrov.xyz/categories/</link>
     <description>Recent content in Categories on Davor Badrov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2017 Davor Badrov</copyright>
     
-	<atom:link href="https://davorbadrov.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://davorbadrov.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
